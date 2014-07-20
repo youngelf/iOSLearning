@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38F580B6197B7FCA00AE0A48 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38F580B5197B7FCA00AE0A48 /* HeaderView.xib */; };
 		F6B6AE0B1977426000CE9D38 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6AE0A1977426000CE9D38 /* Foundation.framework */; };
 		F6B6AE0D1977426000CE9D38 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6AE0C1977426000CE9D38 /* CoreGraphics.framework */; };
 		F6B6AE0F1977426000CE9D38 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6AE0E1977426000CE9D38 /* UIKit.framework */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38F580B5197B7FCA00AE0A48 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		F6B6AE071977426000CE9D38 /* HomeOwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeOwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6B6AE0A1977426000CE9D38 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F6B6AE0C1977426000CE9D38 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -86,6 +88,7 @@
 		F6B6ADFE1977426000CE9D38 = {
 			isa = PBXGroup;
 			children = (
+				38F580B5197B7FCA00AE0A48 /* HeaderView.xib */,
 				F6B6AE391977428500CE9D38 /* CEVItemsViewController.h */,
 				F6B6AE3A1977428500CE9D38 /* CEVItemsViewController.m */,
 				F6B6AE3C1979843C00CE9D38 /* CEVItem.h */,
@@ -235,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38F580B6197B7FCA00AE0A48 /* HeaderView.xib in Resources */,
 				F6B6AE151977426100CE9D38 /* InfoPlist.strings in Resources */,
 				F6B6AE1D1977426100CE9D38 /* Images.xcassets in Resources */,
 			);
@@ -456,6 +460,7 @@
 				F6B6AE351977426100CE9D38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F6B6AE361977426100CE9D38 /* Build configuration list for PBXNativeTarget "HomeOwnerTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +469,7 @@
 				F6B6AE381977426100CE9D38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

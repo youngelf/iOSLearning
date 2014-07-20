@@ -13,6 +13,9 @@
 @interface CEVItemsViewController()
 @property (strong, nonatomic) NSMutableArray *cheap;
 @property (strong, nonatomic) NSMutableArray *expensive;
+
+// To show editing buttons.
+@property (nonatomic, strong) IBOutlet UIView *headerView;
 @end
 
 
@@ -122,7 +125,6 @@ bool MULTI_SECTION = FALSE;
     // Set the text on the item.
     [[cell textLabel] setText:[self perhapsMultiItemText:indexPath]];
 
-    
     CGFloat height = 0;
     
     if (MARK_END_OF_LIST && ([indexPath row] == [[[CEVItemStore sharedStore] allItems] count])) {
@@ -131,10 +133,11 @@ bool MULTI_SECTION = FALSE;
     } else {
         height = 44;
     }
+
     CGRect frame = [cell frame];
     frame.size.height = height;
-    [[cell textLabel] setFrame:frame];
-    [[cell textLabel] setfont];
+    // Cannot figure out how to make the frame shorter.
+//    [cell setFrame:frame];
     return cell;
 }
 
@@ -144,5 +147,26 @@ bool MULTI_SECTION = FALSE;
     [super viewDidLoad];
     [[self tableView] registerClass:[UITableViewCell class]
              forCellReuseIdentifier:TAG];
+    [[self tableView] setTableHeaderView:[self headerView]];
 }
+
+// Create a new item in the list.
+- (IBAction)addNewItem:(id)sender {
+    
+}
+
+// TO change the editing mode of the list view
+- (IBAction)toggleEditingMode:(id)sender {
+    
+}
+
+- (UIView *) headerView {
+    if (!_headerView) {
+        [[NSBundle mainBundle] loadNibNamed:@"HeaderView"
+                                      owner:self
+                                    options:nil];
+    }
+    return _headerView;
+}
+
 @end
