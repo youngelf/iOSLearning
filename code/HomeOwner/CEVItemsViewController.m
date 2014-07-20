@@ -157,6 +157,15 @@ bool MULTI_SECTION = FALSE;
 
 // TO change the editing mode of the list view
 - (IBAction)toggleEditingMode:(id)sender {
+    if ([self isEditing]) {
+        // Turn off editing mode
+        [self setEditing:FALSE animated:TRUE];
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+    } else {
+        // Turn on editing mode
+        [self setEditing:TRUE animated:TRUE];
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+    }
     
 }
 
