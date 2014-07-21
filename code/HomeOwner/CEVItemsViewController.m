@@ -45,9 +45,9 @@ bool MULTI_SECTION = FALSE;
     // Create five items in the default store
     if (self) {
         CEVItemStore *store = [CEVItemStore sharedStore];
-        for (int i = 0; i < 5; ++i) {
-            [store createItem];
-        }
+//        for (int i = 0; i < 5; ++i) {
+//            [store createItem];
+//        }
         if (MULTI_SECTION) {
             // Create two sections out of the shared store
             _cheap = [[NSMutableArray alloc] init];
@@ -152,7 +152,11 @@ bool MULTI_SECTION = FALSE;
 
 // Create a new item in the list.
 - (IBAction)addNewItem:(id)sender {
-    
+    CEVItem *item = [[CEVItemStore sharedStore] createItem];
+    NSUInteger position = [[[CEVItemStore sharedStore] allItems] indexOfObject:item];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:position inSection:0];
+    [[self tableView] insertRowsAtIndexPaths:@[path]
+                            withRowAnimation:UITableViewRowAnimationTop];
 }
 
 // TO change the editing mode of the list view
