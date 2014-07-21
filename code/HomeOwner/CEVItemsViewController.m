@@ -159,6 +159,22 @@ bool MULTI_SECTION = FALSE;
                             withRowAnimation:UITableViewRowAnimationTop];
 }
 
+// Removing items
+- (void) tableView:(UITableView *)tableView
+        commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+        forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    // We only handle deletes.
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        CEVItemStore *store = [CEVItemStore sharedStore];
+        CEVItem *item = [[store allItems] objectAtIndex:[indexPath row]];
+        [store removeItem:item];
+        // And we also need to remove it from the table view. That's terrible.
+        [[self tableView] deleteRowsAtIndexPaths:@[indexPath]
+                                withRowAnimation:UITableViewRowAnimationBottom];
+    }
+}
+
 // TO change the editing mode of the list view
 - (IBAction)toggleEditingMode:(id)sender {
     if ([self isEditing]) {

@@ -19,4 +19,7 @@
 
 // Add an item and take ownership of it.
 - (CEVItem *) createItem;
+
+// Remove an item.
+- (void) removeItem:(CEVItem *) item;
 @end

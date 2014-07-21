@@ -52,4 +52,8 @@
     return item;
 }
 
+- (void) removeItem:(CEVItem *) item {
+    [[self privateItems] removeObjectIdenticalTo:item];
+}
+
 @end
