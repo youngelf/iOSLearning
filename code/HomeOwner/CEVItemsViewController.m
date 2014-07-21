@@ -125,6 +125,11 @@ bool MULTI_SECTION = FALSE;
     // Set the text on the item.
     [[cell textLabel] setText:[self perhapsMultiItemText:indexPath]];
 
+    return cell;
+}
+
+// Gold challenge, changing the height of the row
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat height = 0;
     
     if (MARK_END_OF_LIST && ([indexPath row] == [[[CEVItemStore sharedStore] allItems] count])) {
@@ -133,14 +138,8 @@ bool MULTI_SECTION = FALSE;
     } else {
         height = 44;
     }
-
-    CGRect frame = [cell frame];
-    frame.size.height = height;
-    // Cannot figure out how to make the frame shorter.
-//    [cell setFrame:frame];
-    return cell;
+    return height;
 }
-
 
 - (void) viewDidLoad {
     // Register the tableview for the right tag for view recycling

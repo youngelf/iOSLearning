@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CEVItemsViewController : UITableViewController
+@interface CEVItemsViewController : UITableViewController <UITableViewDelegate>
 
 @end
