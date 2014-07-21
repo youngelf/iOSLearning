@@ -175,6 +175,12 @@ bool MULTI_SECTION = FALSE;
     }
 }
 
+- (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    [[CEVItemStore sharedStore] moveItemAtPosition:[sourceIndexPath row]
+                                        toPosition:[destinationIndexPath row]];
+	}
+
+
 // TO change the editing mode of the list view
 - (IBAction)toggleEditingMode:(id)sender {
     if ([self isEditing]) {

@@ -22,4 +22,7 @@
 
 // Remove an item.
 - (void) removeItem:(CEVItem *) item;
+
+// Move item to new location
+- (void) moveItemAtPosition:(NSUInteger)startPosition toPosition:(NSUInteger)endPosition;
 @end

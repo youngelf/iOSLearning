@@ -56,4 +56,18 @@
     [[self privateItems] removeObjectIdenticalTo:item];
 }
 
+- (void) moveItemAtPosition:(NSUInteger)startPosition toPosition:(NSUInteger)endPosition  {
+    if (startPosition == endPosition) {
+        return;
+    }
+    // Find the item
+    NSMutableArray *allItems = [[CEVItemStore sharedStore] privateItems];
+    CEVItem *item = [allItems objectAtIndex:startPosition];
+    // Remove from the array
+    [allItems removeObject:item];
+    // Move to the new location
+    [allItems insertObject:item atIndex:endPosition];
+    
+}
+
 @end
