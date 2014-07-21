@@ -128,12 +128,17 @@ bool MULTI_SECTION = FALSE;
     return cell;
 }
 
+// True if this is the last row, false otherwise.
+- (BOOL) isLastRow:(NSIndexPath *)indexPath {
+    return (MARK_END_OF_LIST && ([indexPath row] == [[[CEVItemStore sharedStore] allItems] count]));
+}
+
+
 // Gold challenge, changing the height of the row
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     CGFloat height = 0;
     
-    if (MARK_END_OF_LIST && ([indexPath row] == [[[CEVItemStore sharedStore] allItems] count])) {
-        // Last item
+    if ([self isLastRow:indexPath]) {
         height = 20;
     } else {
         height = 44;
@@ -143,6 +148,15 @@ bool MULTI_SECTION = FALSE;
 
 - (NSString *) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
     return @"Bail";
+}
+
+
+- (BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return ![self isLastRow:indexPath];
+}
+
+- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return ![self isLastRow:indexPath];
 }
 
 - (void) viewDidLoad {
