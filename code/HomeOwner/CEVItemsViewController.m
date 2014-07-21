@@ -141,6 +141,10 @@ bool MULTI_SECTION = FALSE;
     return height;
 }
 
+- (NSString *) tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"Bail";
+}
+
 - (void) viewDidLoad {
     // Register the tableview for the right tag for view recycling
     [super viewDidLoad];
