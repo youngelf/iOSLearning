@@ -130,7 +130,12 @@ bool MULTI_SECTION = FALSE;
 
 // True if this is the last row, false otherwise.
 - (BOOL) isLastRow:(NSIndexPath *)indexPath {
-    return (MARK_END_OF_LIST && ([indexPath row] == [[[CEVItemStore sharedStore] allItems] count]));
+    return [self isLastRowForIndex:[indexPath row]];
+}
+
+// True if this is the last row, false otherwise.
+- (BOOL) isLastRowForIndex:(NSUInteger)index {
+    return (MARK_END_OF_LIST && (index == [[[CEVItemStore sharedStore] allItems] count]));
 }
 
 
@@ -157,6 +162,20 @@ bool MULTI_SECTION = FALSE;
 
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     return ![self isLastRow:indexPath];
+}
+
+// Gold challenge, disallow moving below the last level
+- (NSIndexPath *) tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+    // If we are trying to move to the last position, disallow
+    BOOL isLastRow =
+        (MARK_END_OF_LIST
+         && ([proposedDestinationIndexPath row] >=
+             [[[CEVItemStore sharedStore] allItems] count]));
+    if (isLastRow) {
+        return sourceIndexPath;
+    } else {
+        return proposedDestinationIndexPath;
+    }
 }
 
 - (void) viewDidLoad {
@@ -195,7 +214,7 @@ bool MULTI_SECTION = FALSE;
 - (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     [[CEVItemStore sharedStore] moveItemAtPosition:[sourceIndexPath row]
                                         toPosition:[destinationIndexPath row]];
-	}
+}
 
 
 // TO change the editing mode of the list view
