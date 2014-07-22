@@ -46,9 +46,6 @@ bool MULTI_SECTION = FALSE;
     // Create five items in the default store
     if (self) {
         CEVItemStore *store = [CEVItemStore sharedStore];
-//        for (int i = 0; i < 5; ++i) {
-//            [store createItem];
-//        }
         if (MULTI_SECTION) {
             // Create two sections out of the shared store
             _cheap = [[NSMutableArray alloc] init];
@@ -62,6 +59,9 @@ bool MULTI_SECTION = FALSE;
             }
         }
         NSLog(@"Store has: %@", [store allItems]);
+        
+        // Set the title
+        [[self navigationItem] setTitle:@"HomeOwner"];
     }
     return self;
 }

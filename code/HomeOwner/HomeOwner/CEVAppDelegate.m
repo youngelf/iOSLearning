@@ -25,10 +25,7 @@
     // The list view.
     CEVItemsViewController *itemController = [[CEVItemsViewController alloc] init];
 
-    // A Detail view, which doesn't have anything right now.
-    CEVDetailViewController *detailController = [[CEVDetailViewController alloc] init];
-    
-    [navController setViewControllers:@[itemController, detailController]];
+    [navController setViewControllers:@[itemController]];
     
     // And add the UINavController as the root controller
     [[self window] setRootViewController:navController];
