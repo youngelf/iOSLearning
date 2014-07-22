@@ -17,9 +17,16 @@
     // Override point for customization after application launch.
     
     // Create a Table view controller and set it as the root controller.
-    CEVItemsViewController *itemController = [[CEVItemsViewController alloc] init];
     
-    [[self window] setRootViewController:itemController];
+    // Now put a UINavigationViewController and include the ItemViewController as its first element.
+    UINavigationController *navController = [[UINavigationController alloc] init];
+    
+    CEVItemsViewController *itemController = [[CEVItemsViewController alloc] init];
+
+    [navController setViewControllers:@[itemController]];
+    
+    // And add the UINavController as the root controller
+    [[self window] setRootViewController:navController];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
