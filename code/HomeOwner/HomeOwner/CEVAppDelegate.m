@@ -8,6 +8,7 @@
 
 #import "CEVAppDelegate.h"
 #import "CEVItemsViewController.h"
+#import "CEVDetailViewController.h"
 
 @implementation CEVAppDelegate
 
@@ -21,9 +22,13 @@
     // Now put a UINavigationViewController and include the ItemViewController as its first element.
     UINavigationController *navController = [[UINavigationController alloc] init];
     
+    // The list view.
     CEVItemsViewController *itemController = [[CEVItemsViewController alloc] init];
 
-    [navController setViewControllers:@[itemController]];
+    // A Detail view, which doesn't have anything right now.
+    CEVDetailViewController *detailController = [[CEVDetailViewController alloc] init];
+    
+    [navController setViewControllers:@[itemController, detailController]];
     
     // And add the UINavController as the root controller
     [[self window] setRootViewController:navController];

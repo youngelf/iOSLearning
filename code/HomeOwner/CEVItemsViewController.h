@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CEVItem.h"
 
 @interface CEVItemsViewController : UITableViewController <UITableViewDelegate>
-
+@property (weak, nonatomic) CEVItem *item;
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		384780BE197E0CC200DB3F18 /* CEVDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384780BD197E0CC200DB3F18 /* CEVDetailViewController.m */; };
+		384780C0197E1BE400DB3F18 /* CEVDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 384780BF197E1BE400DB3F18 /* CEVDetailViewController.xib */; };
 		38F580B6197B7FCA00AE0A48 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38F580B5197B7FCA00AE0A48 /* HeaderView.xib */; };
 		F6B6AE0B1977426000CE9D38 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6AE0A1977426000CE9D38 /* Foundation.framework */; };
 		F6B6AE0D1977426000CE9D38 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6AE0C1977426000CE9D38 /* CoreGraphics.framework */; };
@@ -36,6 +38,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		384780BC197E0CC200DB3F18 /* CEVDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEVDetailViewController.h; sourceTree = "<group>"; };
+		384780BD197E0CC200DB3F18 /* CEVDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEVDetailViewController.m; sourceTree = "<group>"; };
+		384780BF197E1BE400DB3F18 /* CEVDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEVDetailViewController.xib; sourceTree = "<group>"; };
 		38F580B5197B7FCA00AE0A48 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		F6B6AE071977426000CE9D38 /* HomeOwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeOwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6B6AE0A1977426000CE9D38 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -91,6 +96,9 @@
 				38F580B5197B7FCA00AE0A48 /* HeaderView.xib */,
 				F6B6AE391977428500CE9D38 /* CEVItemsViewController.h */,
 				F6B6AE3A1977428500CE9D38 /* CEVItemsViewController.m */,
+				384780BC197E0CC200DB3F18 /* CEVDetailViewController.h */,
+				384780BD197E0CC200DB3F18 /* CEVDetailViewController.m */,
+				384780BF197E1BE400DB3F18 /* CEVDetailViewController.xib */,
 				F6B6AE3C1979843C00CE9D38 /* CEVItem.h */,
 				F6B6AE3D1979843C00CE9D38 /* CEVItem.m */,
 				F6B6AE3F1979854D00CE9D38 /* CEVItemStore.h */,
@@ -238,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				384780C0197E1BE400DB3F18 /* CEVDetailViewController.xib in Resources */,
 				38F580B6197B7FCA00AE0A48 /* HeaderView.xib in Resources */,
 				F6B6AE151977426100CE9D38 /* InfoPlist.strings in Resources */,
 				F6B6AE1D1977426100CE9D38 /* Images.xcassets in Resources */,
@@ -263,6 +272,7 @@
 				F6B6AE3E1979843C00CE9D38 /* CEVItem.m in Sources */,
 				F6B6AE3B1977428500CE9D38 /* CEVItemsViewController.m in Sources */,
 				F6B6AE411979854D00CE9D38 /* CEVItemStore.m in Sources */,
+				384780BE197E0CC200DB3F18 /* CEVDetailViewController.m in Sources */,
 				F6B6AE1B1977426100CE9D38 /* CEVAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

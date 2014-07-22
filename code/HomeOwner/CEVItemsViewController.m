@@ -9,6 +9,7 @@
 #import "CEVItemsViewController.h"
 #import "CEVItem.h"
 #import "CEVItemStore.h"
+#import "CEVDetailViewController.h"
 
 @interface CEVItemsViewController()
 @property (strong, nonatomic) NSMutableArray *cheap;
@@ -238,6 +239,14 @@ bool MULTI_SECTION = FALSE;
                                     options:nil];
     }
     return _headerView;
+}
+
+// Handle clicking on a single item
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CEVItem *item = [[[CEVItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
+    CEVDetailViewController *controller = [[CEVDetailViewController alloc] init];
+    [controller setItem:item];
+    [[self navigationController] pushViewController:controller animated:YES];
 }
 
 @end
