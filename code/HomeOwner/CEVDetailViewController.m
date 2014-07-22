@@ -27,4 +27,12 @@
     [[self dateLabel] setText:[[[self item] dateCreated] description]];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    // Give up the keyboard
+    [self resignFirstResponder];
+    [[self item] setItemName:[[self nameField] text]];
+    [[self item] setValueInDollars:[[[self valueField] text] intValue]];
+    [[self item] setSerialNumber:[[self nameField] text]];
+}
 @end

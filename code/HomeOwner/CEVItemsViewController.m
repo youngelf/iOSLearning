@@ -249,4 +249,9 @@ bool MULTI_SECTION = FALSE;
     [[self navigationController] pushViewController:controller animated:YES];
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // Reload the table view data in case the backing store has changed.
+    [[self tableView] reloadData];
+}
 @end
