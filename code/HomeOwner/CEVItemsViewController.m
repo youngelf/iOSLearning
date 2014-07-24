@@ -14,9 +14,6 @@
 @interface CEVItemsViewController()
 @property (strong, nonatomic) NSMutableArray *cheap;
 @property (strong, nonatomic) NSMutableArray *expensive;
-
-// To show editing buttons.
-@property (nonatomic, strong) IBOutlet UIView *headerView;
 @end
 
 
@@ -62,6 +59,16 @@ bool MULTI_SECTION = FALSE;
         
         // Set the title
         [[self navigationItem] setTitle:@"HomeOwner"];
+        
+        // Add a "+" button to add new items
+        UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
+                                initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                target:self
+                                action:@selector(addNewItem:)];
+        [[self navigationItem] setLeftBarButtonItem:bbi];
+        
+        // And the right item is the "Edit" button
+        [[self navigationItem] setRightBarButtonItem:[self editButtonItem]];
     }
     return self;
 }
@@ -166,7 +173,9 @@ bool MULTI_SECTION = FALSE;
 }
 
 // Gold challenge, disallow moving below the last level
-- (NSIndexPath *) tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
+- (NSIndexPath *) tableView:(UITableView *)tableView
+    targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+        toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath {
     // If we are trying to move to the last position, disallow
     BOOL isLastRow =
         (MARK_END_OF_LIST
@@ -184,7 +193,6 @@ bool MULTI_SECTION = FALSE;
     [super viewDidLoad];
     [[self tableView] registerClass:[UITableViewCell class]
              forCellReuseIdentifier:TAG];
-    [[self tableView] setTableHeaderView:[self headerView]];
 }
 
 // Create a new item in the list.
@@ -232,26 +240,21 @@ bool MULTI_SECTION = FALSE;
     
 }
 
-- (UIView *) headerView {
-    if (!_headerView) {
-        [[NSBundle mainBundle] loadNibNamed:@"HeaderView"
-                                      owner:self
-                                    options:nil];
-    }
-    return _headerView;
-}
-
 // Handle clicking on a single item
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CEVItem *item = [[[CEVItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
     CEVDetailViewController *controller = [[CEVDetailViewController alloc] init];
     [controller setItem:item];
     [[self navigationController] pushViewController:controller animated:YES];
+    
+    [[self navigationItem] setTitle:[item itemName]];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     // Reload the table view data in case the backing store has changed.
     [[self tableView] reloadData];
+    // And set the title back to HomeOwner
+    [[self navigationItem] setTitle:@"HomeOwner"];
 }
 @end
