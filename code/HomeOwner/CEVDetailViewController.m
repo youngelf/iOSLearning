@@ -13,10 +13,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UITextField *serialField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 
 @end
 
 @implementation CEVDetailViewController
+
+
+- (IBAction)takePicture:(id)sender {
+    NSLog(@"Taking a picture");
+}
 
 - (void) viewWillAppear:(BOOL)animated {
     // Transfer all values over to the views.
