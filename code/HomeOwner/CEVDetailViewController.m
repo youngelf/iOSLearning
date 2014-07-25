@@ -8,7 +8,7 @@
 
 #import "CEVDetailViewController.h"
 
-@interface CEVDetailViewController ()
+@interface CEVDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UITextField *serialField;
@@ -23,6 +23,29 @@
 
 - (IBAction)takePicture:(id)sender {
     NSLog(@"Taking a picture");
+    
+    // Find if a camera is available
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    // I'll handle whatever this results in
+    [picker setDelegate:self];
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+    } else {
+        [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+    
+    // This shows a modal image picker view
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+// Callback received after the user has picked and image
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSLog(@"didFinishPickingMediaWithInfo called.");
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    [[self imageView] setImage:image];
+    
+    // Now dismiss the view controller presented earlier
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
