@@ -20,6 +20,7 @@
 @implementation CEVItemsViewController
 
 NSString *TAG = @"UiTableViewCell";
+NSString *APP_NAME = @"VikiOwner";
 
 // Uncomment this to get multi-section support.
 // #define MULTI_SECTION_DEFINED TRUE
@@ -58,7 +59,7 @@ bool MULTI_SECTION = FALSE;
         NSLog(@"Store has: %@", [store allItems]);
         
         // Set the title
-        [[self navigationItem] setTitle:@"HomeOwner"];
+        [[self navigationItem] setTitle:APP_NAME];
         
         // Add a "+" button to add new items
         UIBarButtonItem *bbi = [[UIBarButtonItem alloc]
@@ -255,6 +256,6 @@ bool MULTI_SECTION = FALSE;
     // Reload the table view data in case the backing store has changed.
     [[self tableView] reloadData];
     // And set the title back to HomeOwner
-    [[self navigationItem] setTitle:@"HomeOwner"];
+    [[self navigationItem] setTitle:APP_NAME];
 }
 @end
