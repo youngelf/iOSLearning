@@ -7,14 +7,17 @@
 //
 
 #import "CEVDetailViewController.h"
+#import "CEVImageStore.h"
 
-@interface CEVDetailViewController () <UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface CEVDetailViewController ()
+    <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UITextField *serialField;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
+- (IBAction)backgroundTapped:(id)sender;
 
 @end
 
@@ -33,16 +36,39 @@
     } else {
         [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
+    [picker setAllowsEditing:YES];
     
     // This shows a modal image picker view
     [self presentViewController:picker animated:YES completion:nil];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+// Give up the keyboard when the background view is tapped
+- (void)backgroundTapped:(id)sender {
+    [[self view] endEditing:YES];
+}
+
 // Callback received after the user has picked and image
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     NSLog(@"didFinishPickingMediaWithInfo called.");
-    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    
+    UIImage *image;
+    // See if an edited image exists
+    if ([info objectForKey:UIImagePickerControllerEditedImage]) {
+        // Use  the edited image;
+        image = [info objectForKey:UIImagePickerControllerEditedImage];
+    } else {
+        image = info[UIImagePickerControllerOriginalImage];
+    }
+
     [[self imageView] setImage:image];
+    
+    // Store this image with the appropriate tag.
+    [[CEVImageStore sharedStore] setImage:image forKey:[[self item] imageTag]];
     
     // Now dismiss the view controller presented earlier
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -55,6 +81,7 @@
     [[self valueField] setText:[NSString stringWithFormat:@"%d", [[self item] valueInDollars]]];
     [[self serialField] setText:[[self item] serialNumber]];
     [[self dateLabel] setText:[[[self item] dateCreated] description]];
+    [[self imageView] setImage:[[CEVImageStore sharedStore] getImageForKey:[[self item] imageTag]]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {

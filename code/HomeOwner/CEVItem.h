@@ -15,6 +15,9 @@
     NSDate *_dateCreated;
 }
 
+// The tag in ImageStore for an image corresponding to this item.
+@property (nonatomic, copy) NSString * imageTag;
+
 + (instancetype)randomItem;
 
 // Designated initializer for BNRItem

@@ -9,6 +9,7 @@
 #import "CEVItemsViewController.h"
 #import "CEVItem.h"
 #import "CEVItemStore.h"
+#import "CEVImageStore.h"
 #import "CEVDetailViewController.h"
 
 @interface CEVItemsViewController()

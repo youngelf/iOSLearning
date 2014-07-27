@@ -63,6 +63,9 @@
         _valueInDollars = value;
         // Set _dateCreated to the current date and time
         _dateCreated = [[NSDate alloc] init];
+        
+        // Create a unique UUID string.
+        _imageTag = [[[NSUUID alloc] init] UUIDString];
     }
 
     // Return the address of the newly initialized object

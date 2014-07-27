@@ -7,7 +7,7 @@
 //
 
 #import "CEVItemStore.h"
-
+#import "CEVImageStore.h"
 @interface CEVItemStore()
 @property (nonatomic) NSMutableArray *privateItems;
 
@@ -53,6 +53,8 @@
 }
 
 - (void) removeItem:(CEVItem *) item {
+    // Delete the image associated with this item
+    [[CEVImageStore sharedStore] deleteImageForKey:[item imageTag]];
     [[self privateItems] removeObjectIdenticalTo:item];
 }
 
