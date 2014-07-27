@@ -83,6 +83,11 @@
                                 <action selector="takePicture:" destination="-1" id="BBn-Od-ojy"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem systemItem="refresh" id="mT8-4l-TYZ">
+                            <connections>
+                                <action selector="removeImage:" destination="-1" id="bDp-YQ-jJw"/>
+                            </connections>
+                        </barButtonItem>
                     </items>
                 </toolbar>
             </subviews>

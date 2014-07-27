@@ -23,6 +23,12 @@
 
 @implementation CEVDetailViewController
 
+// Delete the image from this item.
+- (IBAction)removeImage:(id)sender {
+    [[CEVImageStore sharedStore] deleteImageForKey:[[self item] imageTag]];
+    [[self imageView] setImage:nil];
+}
+
 
 - (IBAction)takePicture:(id)sender {
     NSLog(@"Taking a picture");
