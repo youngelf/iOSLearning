@@ -19,6 +19,9 @@
 		3832FF9D1984BD3300816E99 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3832FF851984BD3300816E99 /* UIKit.framework */; };
 		3832FFA51984BD3300816E99 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3832FFA31984BD3300816E99 /* InfoPlist.strings */; };
 		3832FFA71984BD3300816E99 /* TouchTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3832FFA61984BD3300816E99 /* TouchTrackerTests.m */; };
+		3832FFB21984C23F00816E99 /* CEVLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3832FFB11984C23F00816E99 /* CEVLine.m */; };
+		3832FFB51984C29500816E99 /* CEVDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3832FFB41984C29500816E99 /* CEVDrawView.m */; };
+		3832FFB81984C2AF00816E99 /* CEVDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3832FFB71984C2AF00816E99 /* CEVDrawViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		3832FFA21984BD3300816E99 /* TouchTrackerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TouchTrackerTests-Info.plist"; sourceTree = "<group>"; };
 		3832FFA41984BD3300816E99 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3832FFA61984BD3300816E99 /* TouchTrackerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TouchTrackerTests.m; sourceTree = "<group>"; };
+		3832FFB01984C23E00816E99 /* CEVLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEVLine.h; sourceTree = "<group>"; };
+		3832FFB11984C23F00816E99 /* CEVLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEVLine.m; sourceTree = "<group>"; };
+		3832FFB31984C29500816E99 /* CEVDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEVDrawView.h; sourceTree = "<group>"; };
+		3832FFB41984C29500816E99 /* CEVDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEVDrawView.m; sourceTree = "<group>"; };
+		3832FFB61984C2AF00816E99 /* CEVDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEVDrawViewController.h; sourceTree = "<group>"; };
+		3832FFB71984C2AF00816E99 /* CEVDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEVDrawViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +118,12 @@
 			children = (
 				3832FF901984BD3300816E99 /* CEVAppDelegate.h */,
 				3832FF911984BD3300816E99 /* CEVAppDelegate.m */,
+				3832FFB01984C23E00816E99 /* CEVLine.h */,
+				3832FFB11984C23F00816E99 /* CEVLine.m */,
+				3832FFB31984C29500816E99 /* CEVDrawView.h */,
+				3832FFB41984C29500816E99 /* CEVDrawView.m */,
+				3832FFB61984C2AF00816E99 /* CEVDrawViewController.h */,
+				3832FFB71984C2AF00816E99 /* CEVDrawViewController.m */,
 				3832FF931984BD3300816E99 /* Images.xcassets */,
 				3832FF881984BD3300816E99 /* Supporting Files */,
 			);
@@ -241,7 +256,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3832FF8E1984BD3300816E99 /* main.m in Sources */,
+				3832FFB81984C2AF00816E99 /* CEVDrawViewController.m in Sources */,
 				3832FF921984BD3300816E99 /* CEVAppDelegate.m in Sources */,
+				3832FFB21984C23F00816E99 /* CEVLine.m in Sources */,
+				3832FFB51984C29500816E99 /* CEVDrawView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,7 +317,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -338,7 +356,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -363,6 +381,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TouchTracker/TouchTracker-Prefix.pch";
 				INFOPLIST_FILE = "TouchTracker/TouchTracker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -376,6 +395,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TouchTracker/TouchTracker-Prefix.pch";
 				INFOPLIST_FILE = "TouchTracker/TouchTracker-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

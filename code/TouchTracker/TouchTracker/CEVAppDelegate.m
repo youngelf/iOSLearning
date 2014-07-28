@@ -7,6 +7,7 @@
 //
 
 #import "CEVAppDelegate.h"
+#import "CEVDrawViewController.h"
 
 @implementation CEVAppDelegate
 
@@ -14,7 +15,10 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+        // self.window.backgroundColor = [UIColor blueColor];
+    
+    CEVDrawViewController *controller = [[CEVDrawViewController alloc] init];
+    [[self window] setRootViewController:controller];
     [self.window makeKeyAndVisible];
     return YES;
 }
