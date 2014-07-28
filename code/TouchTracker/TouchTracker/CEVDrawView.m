@@ -10,7 +10,8 @@
 #import "CEVLine.h"
 
 @interface CEVDrawView()
-@property (nonatomic, strong) CEVLine *currentLine;
+// Multi-touch will produce many lines.
+@property (nonatomic, strong) NSMutableDictionary *currentLines;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 @end
 
@@ -20,8 +21,9 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        [self setCurrentLines:[[NSMutableDictionary alloc] init]];
         [self setFinishedLines:[[NSMutableArray alloc] init]];
-        [self setBackgroundColor:[UIColor grayColor]];
+        [self setBackgroundColor:[UIColor whiteColor]];
     }
     return self;
 }
@@ -50,32 +52,60 @@
     
     // Now change the color to red and draw the current line
     [[UIColor redColor] set];
-    [self strokeLine:[self currentLine]];
+    for (NSValue *key in [self currentLines]) {
+        [self strokeLine:[[self currentLines] objectForKey:key]];
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches
            withEvent:(UIEvent *)event {
-    UITouch *touch = [touches anyObject];
-    [self setCurrentLine:[[CEVLine alloc] init]];
+    for (UITouch *touch in touches) {
+        // Start a new line.
+        CEVLine *line = [[CEVLine alloc] init];
+        
+        // The location of the touch in our view.
+        CGPoint location = [touch locationInView:self];
+        [line setBegin:location];
+        [line setEnd:location];
 
-    // The location of the touch in our view.
-    CGPoint location = [touch locationInView:self];
-    [[self currentLine] setBegin:location];
-    [[self currentLine] setEnd:location];
+        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+
+        // And add it to our list.
+        [[self currentLines] setObject:line forKey:key];
+    }
+    // Update this view, please.
     [self setNeedsDisplay];
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
     // Update the end point with this event
-    [[self currentLine] setEnd:[[touches anyObject] locationInView:self]];
+    for (UITouch *touch in touches) {
+        // Get the element to modify
+        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+        [[[self currentLines] objectForKey:key] setEnd:[touch locationInView:self]];
+    }
     [self setNeedsDisplay];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     // Add the current line to the array
-    [[self finishedLines] addObject:[self currentLine]];
-    [self setCurrentLine:nil];
-    
+    for (UITouch *touch in touches) {
+        // Remove from the current lines.
+        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+        CEVLine *line = [[self currentLines] objectForKey:key];
+        [[self currentLines] removeObjectForKey:key];
+        // Add to the finished lines.
+        [[self finishedLines] addObject:line];
+    }
+    [self setNeedsDisplay];
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+    // Remove all current state and don't add these movements to the lines
+    for (UITouch *touch in touches) {
+        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+        [[self currentLines] removeObjectForKey:key];
+    }
     [self setNeedsDisplay];
 }
 

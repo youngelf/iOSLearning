@@ -14,6 +14,8 @@
 - (void)loadView {
     // Create a new DrawView and load that in.
     CEVDrawView *view = [[CEVDrawView alloc] initWithFrame:CGRectZero];
+    // Multi-touch, baby.
+    [view setMultipleTouchEnabled:YES];
     [self setView:view];
 }
 
