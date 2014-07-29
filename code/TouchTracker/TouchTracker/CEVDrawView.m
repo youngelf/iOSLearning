@@ -24,8 +24,23 @@
         [self setCurrentLines:[[NSMutableDictionary alloc] init]];
         [self setFinishedLines:[[NSMutableArray alloc] init]];
         [self setBackgroundColor:[UIColor whiteColor]];
+        
+        // Recognize double taps
+        UITapGestureRecognizer *doubleTapper = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                       action:@selector(doubleTap:)];
+        [doubleTapper setNumberOfTapsRequired:2];
+        [self addGestureRecognizer:doubleTapper];
     }
     return self;
+}
+
+- (void) doubleTap: (UIGestureRecognizer *)gs {
+    NSLog(@"Double tap received.");
+    // Clear the screen
+    [[self currentLines] removeAllObjects];
+    [[self finishedLines] removeAllObjects];
+    
+    [self setNeedsDisplay];
 }
 
 // Stroke a line with a Bezier Path

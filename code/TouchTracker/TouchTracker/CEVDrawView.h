@@ -10,4 +10,5 @@
 
 @interface CEVDrawView : UIView
 
+- (void) doubleTap: (UIGestureRecognizer *)gs;
 @end
