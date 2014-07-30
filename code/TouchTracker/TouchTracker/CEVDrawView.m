@@ -13,6 +13,7 @@
 // Multi-touch will produce many lines.
 @property (nonatomic, strong) NSMutableDictionary *currentLines;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
+@property (nonatomic, weak) CEVLine *selectedLine;
 @end
 
 @implementation CEVDrawView
@@ -26,10 +27,21 @@
         [self setBackgroundColor:[UIColor whiteColor]];
         
         // Recognize double taps
-        UITapGestureRecognizer *doubleTapper = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                       action:@selector(doubleTap:)];
+        UITapGestureRecognizer *doubleTapper =
+            [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(doubleTap:)];
         [doubleTapper setNumberOfTapsRequired:2];
+        [doubleTapper setDelaysTouchesBegan:YES];
         [self addGestureRecognizer:doubleTapper];
+        
+        // Single tap recognizer
+        UITapGestureRecognizer *singleTapper =
+            [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                    action:@selector(singleTap:)];
+        [singleTapper setDelaysTouchesBegan:YES];
+        [singleTapper requireGestureRecognizerToFail:doubleTapper];
+        [self addGestureRecognizer:singleTapper];
+
     }
     return self;
 }
@@ -41,6 +53,10 @@
     [[self finishedLines] removeAllObjects];
     
     [self setNeedsDisplay];
+}
+
+- (void) singleTap: (UIGestureRecognizer *) gs {
+    NSLog(@"Single tap");
 }
 
 // Stroke a line with a Bezier Path
@@ -69,6 +85,12 @@
     [[UIColor redColor] set];
     for (NSValue *key in [self currentLines]) {
         [self strokeLine:[[self currentLines] objectForKey:key]];
+    }
+    
+    // The selected line is drawn in green
+    if ([self selectedLine]) {
+        [[UIColor greenColor] set];
+        [self strokeLine:[self selectedLine]];
     }
 }
 
