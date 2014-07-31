@@ -59,7 +59,34 @@
     NSLog(@"Single tap");
     
     // Check if a point is close enough
-    [self setSelectedLine:[self lineAtPoint:[gs locationInView:self]]];
+    CGPoint point = [gs locationInView:self];
+    [self setSelectedLine:[self lineAtPoint:point]];
+    
+    // Create a menu controller: there is only one shared instance.
+    UIMenuController *menu = [UIMenuController sharedMenuController];
+    bool visible = NO;
+    if ([self selectedLine]) {
+        // Show a menu here
+        [self becomeFirstResponder];
+        // Create a "Delete" item
+        UIMenuItem *delete = [[UIMenuItem alloc] initWithTitle:@"Delete"
+                                                        action:@selector(deleteLine:)];
+        [menu setMenuItems:@[delete]];
+        [menu setTargetRect:CGRectMake(point.x, point.y, 2, 2)
+                     inView:self];
+        visible = YES;
+    }
+    [menu setMenuVisible:visible animated:YES];
+    
+    [self setNeedsDisplay];
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+- (void) deleteLine: (UIMenuController *)controller {
+    [[self finishedLines] removeObject:[self selectedLine]];
     [self setNeedsDisplay];
 }
 
