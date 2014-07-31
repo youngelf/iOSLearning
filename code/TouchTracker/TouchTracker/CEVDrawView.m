@@ -52,7 +52,6 @@
                                                 action:@selector(singleTap:)];
         [singleTapper setDelaysTouchesBegan:YES];
         [singleTapper requireGestureRecognizerToFail:doubleTapper];
-        [singleTapper requireGestureRecognizerToFail:longPress];
         [self addGestureRecognizer:singleTapper];
     }
     return self;
@@ -67,7 +66,7 @@
     if (![self selectedLine]) {
         return;
     }
-    [[self currentLines] removeAllObjects];
+    [gs setCancelsTouchesInView:YES];
     // Get the co-ordinates of the moved location
     CGPoint translation = [gs translationInView:self];
     CGPoint begin = [[self selectedLine] begin];
@@ -237,10 +236,6 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    // Maybe we are panning, so check if there are any current lines
-    if ([[self currentLines] count] == 0) {
-        return;
-    }
     // Add the current line to the array
     for (UITouch *touch in touches) {
         // Remove from the current lines.
