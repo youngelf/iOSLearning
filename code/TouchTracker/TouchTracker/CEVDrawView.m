@@ -9,11 +9,12 @@
 #import "CEVDrawView.h"
 #import "CEVLine.h"
 
-@interface CEVDrawView()
+@interface CEVDrawView() <UIGestureRecognizerDelegate>
 // Multi-touch will produce many lines.
 @property (nonatomic, strong) NSMutableDictionary *currentLines;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 @property (nonatomic, weak) CEVLine *selectedLine;
+@property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
 @end
 
 @implementation CEVDrawView
@@ -42,8 +43,42 @@
         [singleTapper requireGestureRecognizerToFail:doubleTapper];
         [self addGestureRecognizer:singleTapper];
 
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                action:@selector(longPress:)];
+        [self addGestureRecognizer:longPress];
+        
+        [self setMoveRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                        action:@selector(moveLine:)]];
+        [[self moveRecognizer] setDelegate:self];
+        [[self moveRecognizer] setCancelsTouchesInView:NO];
+        [self addGestureRecognizer:[self moveRecognizer]];
     }
     return self;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+        shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return (gestureRecognizer == [self moveRecognizer]);
+}
+
+- (void) moveLine: (UIPanGestureRecognizer *) gs {
+    if (![self selectedLine]) {
+        return;
+    }
+    // Get the co-ordinates of the moved location
+    CGPoint translation = [gs translationInView:self];
+    CGPoint begin = [[self selectedLine] begin];
+    CGPoint end = [[self selectedLine] end];
+    begin.x += translation.x;
+    begin.y += translation.y;
+    end.x += translation.x;
+    end.y += translation.y;
+    
+    [[self selectedLine] setBegin:begin];
+    [[self selectedLine] setEnd:end];
+    [self setNeedsDisplay];
+    
+    [gs setTranslation:CGPointZero inView:self];
 }
 
 - (void) doubleTap: (UIGestureRecognizer *)gs {
@@ -63,7 +98,7 @@
     [self setSelectedLine:[self lineAtPoint:point]];
     
     // Create a menu controller: there is only one shared instance.
-    UIMenuController *menu = [UIMenuController sharedMenuController];
+    UIMenuController *menu  = [UIMenuController sharedMenuController];
     bool visible = NO;
     if ([self selectedLine]) {
         // Show a menu here
@@ -79,6 +114,27 @@
     [menu setMenuVisible:visible animated:YES];
     
     [self setNeedsDisplay];
+}
+
+- (void) longPress: (UIGestureRecognizer *) gs {
+    NSLog(@"Long press detected");
+    bool needsUpdate = NO;
+    if ([gs state] == UIGestureRecognizerStateBegan) {
+        // First, select a point
+        CGPoint point = [gs locationInView:self];
+        [self setSelectedLine:[self lineAtPoint:point]];
+        if ([self selectedLine]) {
+            // Stop working on all lines
+            [[self currentLines] removeAllObjects];
+            needsUpdate = YES;
+        }
+    } else if ([gs state] == UIGestureRecognizerStateEnded) {
+        [self setSelectedLine:nil];
+        needsUpdate = YES;
+    }
+    if (needsUpdate) {
+        [self setNeedsDisplay];
+    }
 }
 
 - (BOOL)canBecomeFirstResponder {
