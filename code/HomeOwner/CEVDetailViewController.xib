@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTf-ic-ATv">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YTf-ic-ATv">
                     <rect key="frame" x="20" y="91" width="55" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
@@ -30,7 +30,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByF-3C-VKu">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Value" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ByF-3C-VKu">
                     <rect key="frame" x="20" y="129" width="55" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
@@ -39,7 +39,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Serial" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfC-GT-xaQ">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Serial" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rfC-GT-xaQ">
                     <rect key="frame" x="20" y="167" width="55" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
@@ -48,7 +48,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Date Created" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5Y-Ef-8AS">
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date Created" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5Y-Ef-8AS">
                     <rect key="frame" x="20" y="207" width="138" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>
@@ -57,19 +57,19 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5j-3i-Oaf">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k5j-3i-Oaf">
                     <rect key="frame" x="83" y="131" width="217" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OT8-nl-qHw">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OT8-nl-qHw">
                     <rect key="frame" x="83" y="169" width="217" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="zxS-8M-xGG">
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="zxS-8M-xGG">
                     <rect key="frame" x="83" y="93" width="217" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -98,9 +98,11 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="P5Y-Ef-8AS" firstAttribute="top" secondItem="OT8-nl-qHw" secondAttribute="bottom" constant="8" symbolic="YES" id="4sK-Ia-PJA"/>
                 <constraint firstAttribute="trailing" secondItem="zxS-8M-xGG" secondAttribute="trailing" constant="20" id="6yo-OB-E0M"/>
                 <constraint firstAttribute="trailing" secondItem="k5j-3i-Oaf" secondAttribute="trailing" constant="20" id="BCA-mx-7xf"/>
                 <constraint firstItem="zxS-8M-xGG" firstAttribute="leading" secondItem="YTf-ic-ATv" secondAttribute="trailing" constant="8" id="BWP-go-vYU"/>
+                <constraint firstItem="rfC-GT-xaQ" firstAttribute="top" secondItem="ByF-3C-VKu" secondAttribute="bottom" constant="8" symbolic="YES" id="HvV-01-deS"/>
                 <constraint firstAttribute="bottom" secondItem="11t-gt-XS5" secondAttribute="bottom" id="NEy-fX-acE"/>
                 <constraint firstItem="P5Y-Ef-8AS" firstAttribute="top" secondItem="OT8-nl-qHw" secondAttribute="bottom" constant="8" symbolic="YES" id="QJa-At-b2h"/>
                 <constraint firstItem="ByF-3C-VKu" firstAttribute="bottom" secondItem="k5j-3i-Oaf" secondAttribute="bottom" id="Xfz-mq-Vxi"/>
@@ -112,7 +114,9 @@
                 <constraint firstItem="OT8-nl-qHw" firstAttribute="leading" secondItem="rfC-GT-xaQ" secondAttribute="trailing" constant="8" id="hRb-g5-Yi6"/>
                 <constraint firstItem="zxS-8M-xGG" firstAttribute="height" secondItem="k5j-3i-Oaf" secondAttribute="height" id="lu9-mp-wyr"/>
                 <constraint firstItem="11t-gt-XS5" firstAttribute="leading" secondItem="5IG-2G-AdK" secondAttribute="leading" id="mbj-kf-op4"/>
+                <constraint firstItem="YTf-ic-ATv" firstAttribute="top" secondItem="5IG-2G-AdK" secondAttribute="top" constant="91" id="n8t-1Q-yn6"/>
                 <constraint firstItem="rfC-GT-xaQ" firstAttribute="leading" secondItem="5IG-2G-AdK" secondAttribute="leading" constant="20" id="nPN-Rs-YzW"/>
+                <constraint firstItem="ByF-3C-VKu" firstAttribute="top" secondItem="YTf-ic-ATv" secondAttribute="bottom" constant="8" symbolic="YES" id="omv-xe-Sbu"/>
                 <constraint firstItem="zxS-8M-xGG" firstAttribute="height" secondItem="OT8-nl-qHw" secondAttribute="height" id="q8V-P9-ALc"/>
                 <constraint firstItem="P5Y-Ef-8AS" firstAttribute="leading" secondItem="5IG-2G-AdK" secondAttribute="leading" constant="20" id="qWI-ej-HPL"/>
                 <constraint firstItem="YTf-ic-ATv" firstAttribute="leading" secondItem="5IG-2G-AdK" secondAttribute="leading" constant="20" id="tzt-YV-bBt"/>
