@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 - (IBAction)backgroundTapped:(id)sender;
+/** The camera button in the toolbar. */
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 @end
 
@@ -88,6 +90,10 @@
     [[self serialField] setText:[[self item] serialNumber]];
     [[self dateLabel] setText:[[[self item] dateCreated] description]];
     [[self imageView] setImage:[[CEVImageStore sharedStore] getImageForKey:[[self item] imageTag]]];
+
+    // Do orientation-specific arrangement
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    [self prepareViewsForOrientation:orientation];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
@@ -98,4 +104,60 @@
     [[self item] setValueInDollars:[[[self valueField] text] intValue]];
     [[self item] setSerialNumber:[[self nameField] text]];
 }
+
+// Creating the photo view in code.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    UIImageView *image = [[UIImageView alloc] initWithImage:nil];
+    // Aspect fit the image.
+    [image setContentMode:UIViewContentModeScaleAspectFit];
+    // Do not produce a translated constraint. What does that mean?
+    [image setTranslatesAutoresizingMaskIntoConstraints:NO];
+    
+    [[self view] addSubview:image];
+    [self setImageView:image];
+    
+    // When faced with a smaller image, allow the image view to grow vertially
+    [image setContentHuggingPriority:200 forAxis:UILayoutConstraintAxisVertical];
+    // Do not allow this view to shrink too much
+    [image setContentCompressionResistancePriority:700 forAxis:UILayoutConstraintAxisVertical];
+
+    
+    // Dictionary from strings to objects
+    NSDictionary *nameToObject = @{ @"imageView" : [self imageView],
+                                    @"dateLabel" : [self dateLabel],
+                                    @"toolbar" : [self bottomToolbar]};
+    
+    // The horizontal and vertical constraints
+    NSArray *horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[imageView]-0-|"
+                                                                  options:0
+                                                                  metrics:nil
+                                                                    views:nameToObject];
+    NSArray *vertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dateLabel]-[imageView]-[toolbar]"
+                                                                options:0
+                                                                metrics:nil
+                                                                  views:nameToObject];
+    [[self view] addConstraints:horizontal];
+    [[self view] addConstraints:vertical];
+}
+
+/** Disable the camera button in landscape for iPhone. */
+- (void) prepareViewsForOrientation:(UIInterfaceOrientation) orientation {
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        return;
+    }
+
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        [[self cameraButton] setEnabled:NO];;
+        [[self imageView] setHidden:YES];
+    } else {
+        [[self cameraButton] setEnabled:YES];;
+        [[self imageView] setHidden:NO];
+    }
+}
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    [self prepareViewsForOrientation:toInterfaceOrientation];
+}
+
 @end

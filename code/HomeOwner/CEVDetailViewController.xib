@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CEVDetailViewController">
             <connections>
                 <outlet property="bottomToolbar" destination="11t-gt-XS5" id="1qR-4N-TaN"/>
+                <outlet property="cameraButton" destination="nMC-ed-eSe" id="pxL-Mo-hkH"/>
                 <outlet property="dateLabel" destination="P5Y-Ef-8AS" id="dLa-vN-JWd"/>
                 <outlet property="nameField" destination="zxS-8M-xGG" id="jo7-L4-cCn"/>
                 <outlet property="serialField" destination="OT8-nl-qHw" id="fNA-rh-1hD"/>
