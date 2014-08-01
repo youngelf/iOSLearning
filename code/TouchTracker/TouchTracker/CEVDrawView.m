@@ -15,6 +15,8 @@
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 @property (nonatomic, weak) CEVLine *selectedLine;
 @property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
+// The shared menu, if one is visible
+@property (nonatomic, strong) UIMenuController *deleteMenu;
 @end
 
 @implementation CEVDrawView
@@ -66,7 +68,8 @@
     if (![self selectedLine]) {
         return;
     }
-    [gs setCancelsTouchesInView:YES];
+    // Stop recognizing this as raw touches so we won't get incorrect lines
+    [[self moveRecognizer] setCancelsTouchesInView:YES];
     // Get the co-ordinates of the moved location
     CGPoint translation = [gs translationInView:self];
     CGPoint begin = [[self selectedLine] begin];
@@ -78,6 +81,16 @@
     
     [[self selectedLine] setBegin:begin];
     [[self selectedLine] setEnd:end];
+
+    // Also move the menu to the middle of the line.
+    if ([self deleteMenu]) {
+        CGPoint point = CGPointMake((begin.x + end.x)/2.0, (begin.y+end.y)/2.0);
+        [[self deleteMenu] setTargetRect:CGRectMake(point.x, point.y, 2, 2)
+                                  inView:self];
+        
+    }
+
+    
     [self setNeedsDisplay];
     
     [gs setTranslation:CGPointZero inView:self];
@@ -112,12 +125,18 @@
         [menu setTargetRect:CGRectMake(point.x, point.y, 2, 2)
                      inView:self];
         
+        [self setDeleteMenu:menu];
         // No line is in progress now
         [[self currentLines] removeAllObjects];
         visible = YES;
+    } else {
+        [self setDeleteMenu:nil];
     }
     [menu setMenuVisible:visible animated:YES];
-    
+
+    // Allow subsequent raw touch events
+    [[self moveRecognizer] setCancelsTouchesInView:NO];
+
     [self setNeedsDisplay];
 }
 
