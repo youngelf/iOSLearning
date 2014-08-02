@@ -10,7 +10,7 @@
 #import "CEVImageStore.h"
 
 @interface CEVDetailViewController ()
-    <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate>
+    <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *valueField;
 @property (weak, nonatomic) IBOutlet UITextField *serialField;
@@ -21,6 +21,7 @@
 /** The camera button in the toolbar. */
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
+@property (strong, nonatomic) UIPopoverController *imagePickerPopOver;
 @end
 
 @implementation CEVDetailViewController
@@ -34,6 +35,14 @@
 
 - (IBAction)takePicture:(id)sender {
     NSLog(@"Taking a picture");
+
+    // If a popover is visible, iOS throws a hissy fit if the camera button is pressed again.
+    // So if it is visible, dismiss it
+    if ([self imagePickerPopOver]) {
+        [[self imagePickerPopOver] dismissPopoverAnimated:YES];
+        [self setImagePickerPopOver:nil];
+        return;
+    }
     
     // Find if a camera is available
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -45,9 +54,22 @@
         [picker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
     }
     [picker setAllowsEditing:YES];
-    
-    // This shows a modal image picker view
-    [self presentViewController:picker animated:YES completion:nil];
+
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        // Can create a popover here
+        [self setImagePickerPopOver:[[UIPopoverController alloc] initWithContentViewController:picker]];
+        [[self imagePickerPopOver] setDelegate:self];
+        [[self imagePickerPopOver] presentPopoverFromBarButtonItem:[self cameraButton]
+                                          permittedArrowDirections:UIPopoverArrowDirectionAny
+                                                          animated:YES];
+    } else {
+        // This shows a modal image picker view
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    [self setImagePickerPopOver:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -79,7 +101,14 @@
     [[CEVImageStore sharedStore] setImage:image forKey:[[self item] imageTag]];
     
     // Now dismiss the view controller presented earlier
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self imagePickerPopOver]) {
+        // on tablet
+        [[self imagePickerPopOver] dismissPopoverAnimated:YES];
+        [self setImagePickerPopOver:nil];
+    } else {
+        // on phone
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -121,7 +150,8 @@
     // When faced with a smaller image, allow the image view to grow vertially
     [image setContentHuggingPriority:200 forAxis:UILayoutConstraintAxisVertical];
     // Do not allow this view to shrink too much
-    [image setContentCompressionResistancePriority:700 forAxis:UILayoutConstraintAxisVertical];
+    [image setContentCompressionResistancePriority:700
+                                           forAxis:UILayoutConstraintAxisVertical];
 
     
     // Dictionary from strings to objects
@@ -130,14 +160,16 @@
                                     @"toolbar" : [self bottomToolbar]};
     
     // The horizontal and vertical constraints
-    NSArray *horizontal = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[imageView]-0-|"
-                                                                  options:0
-                                                                  metrics:nil
-                                                                    views:nameToObject];
-    NSArray *vertical = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[dateLabel]-[imageView]-[toolbar]"
-                                                                options:0
-                                                                metrics:nil
-                                                                  views:nameToObject];
+    NSArray *horizontal = [NSLayoutConstraint
+                           constraintsWithVisualFormat:@"H:|-0-[imageView]-0-|"
+                           options:0
+                           metrics:nil
+                           views:nameToObject];
+    NSArray *vertical = [NSLayoutConstraint
+                         constraintsWithVisualFormat:@"V:[dateLabel]-[imageView]-[toolbar]"
+                         options:0
+                         metrics:nil
+                         views:nameToObject];
     [[self view] addConstraints:horizontal];
     [[self view] addConstraints:vertical];
 }
@@ -156,6 +188,7 @@
         [[self imageView] setHidden:NO];
     }
 }
+
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [self prepareViewsForOrientation:toInterfaceOrientation];
 }
