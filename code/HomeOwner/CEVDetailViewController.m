@@ -8,6 +8,7 @@
 
 #import "CEVDetailViewController.h"
 #import "CEVImageStore.h"
+#import "CEVItemStore.h"
 
 @interface CEVDetailViewController ()
     <UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate, UIPopoverControllerDelegate>
@@ -191,6 +192,46 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
     [self prepareViewsForOrientation:toInterfaceOrientation];
+}
+
+/// Modal view of the same object
+- (instancetype)initForNewItem:(BOOL)isNew {
+    self = [super initWithNibName:nil bundle:nil];
+    if (self && isNew) {
+        // Create new buttons
+        UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                              target:self
+                                                                              action:@selector(saveModal:)];
+        [[self navigationItem] setRightBarButtonItem:done];
+
+        // And a cancel button
+        UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                target:self
+                                                                                action:@selector(cancelModal:)];
+        [[self navigationItem] setLeftBarButtonItem:cancel];
+    }
+    return self;
+}
+
+- (void) saveModal:(id *) sender {
+    [[self presentingViewController] dismissViewControllerAnimated:YES completion:[self dismissBlock]];
+}
+
+- (void) cancelModal:(id *) sender {
+    // First remove the item from the store, and then save
+    [[CEVItemStore sharedStore] removeItem:[self item]];
+    [self saveModal:nil];
+}
+
+
+
+// Make the designated initializer illegal to call
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    // Can't call this!
+    @throw [[NSException alloc] initWithName:@"Illegal initializer."
+                                      reason:@"Use initForNewName: instead"
+                                    userInfo:nil];
+    return nil;
 }
 
 @end

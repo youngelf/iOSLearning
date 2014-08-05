@@ -200,10 +200,37 @@ bool MULTI_SECTION = FALSE;
 // Create a new item in the list.
 - (IBAction)addNewItem:(id)sender {
     CEVItem *item = [[CEVItemStore sharedStore] createItem];
-    NSUInteger position = [[[CEVItemStore sharedStore] allItems] indexOfObject:item];
-    NSIndexPath *path = [NSIndexPath indexPathForRow:position inSection:0];
-    [[self tableView] insertRowsAtIndexPaths:@[path]
-                            withRowAnimation:UITableViewRowAnimationTop];
+
+    // Use a modal view instead of populating the views right here.
+    BOOL useModal = YES;
+    if (useModal) {
+        CEVDetailViewController *detail = [[CEVDetailViewController alloc] initForNewItem:YES];
+        [detail setItem:item];
+        // Set data reload as the callback
+        [detail setDismissBlock:^{
+            [[self tableView] reloadData];
+        }];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:detail];
+        [nav setModalPresentationStyle:UIModalPresentationFormSheet];
+        [nav setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+
+        // Extras: experimenting with modal presentation controllers.  This will make the child controller
+        // take all of the CEVItemsViewController view but NOT the parent's view (the navigation bar will be left alone).
+        BOOL overrideDefaultModalBehavior = NO;
+        if (overrideDefaultModalBehavior) {
+            // Ask the child to expect this short-circuiting.
+            [nav setModalPresentationStyle:UIModalPresentationCurrentContext];
+            // The presenting view controller is usually the top-level parent, but a child can
+            // intercept the request in this manner
+            [self setDefinesPresentationContext:YES];
+        }
+        [self presentViewController:nav animated:YES completion:nil];
+    } else {
+        NSUInteger position = [[[CEVItemStore sharedStore] allItems] indexOfObject:item];
+        NSIndexPath *path = [NSIndexPath indexPathForRow:position inSection:0];
+        [[self tableView] insertRowsAtIndexPaths:@[path]
+                                withRowAnimation:UITableViewRowAnimationTop];
+    }
 }
 
 // Removing items
@@ -245,7 +272,7 @@ bool MULTI_SECTION = FALSE;
 // Handle clicking on a single item
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CEVItem *item = [[[CEVItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
-    CEVDetailViewController *controller = [[CEVDetailViewController alloc] init];
+    CEVDetailViewController *controller = [[CEVDetailViewController alloc] initForNewItem:NO];
     [controller setItem:item];
     [[self navigationController] pushViewController:controller animated:YES];
     

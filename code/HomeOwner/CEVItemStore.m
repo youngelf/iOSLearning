@@ -17,10 +17,15 @@
 @implementation CEVItemStore
 
 + (instancetype) sharedStore {
-    static CEVItemStore *store;
+    // Creating a single object in a thread-safe way
     // If the singleton instance exists, return that.
+    static CEVItemStore *store = nil;
     if (!store) {
-        store = [[CEVItemStore alloc] initPrivate];
+        static dispatch_once_t once_token;
+        dispatch_once(&once_token, ^{
+            store = [[CEVItemStore alloc] initPrivate];
+            
+        });
     }
     return store;
 }
@@ -35,8 +40,11 @@
 
 - (instancetype) initPrivate {
     self = [super init];
+    // Try to restore from disk, if possible
+    NSString *path = [self itemArchivePath];
+    _privateItems = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     // Set up the Mutable array
-    if (self) {
+    if (!_privateItems) {
         [self setPrivateItems:[[NSMutableArray alloc] init]];
     }
     return self;
@@ -47,7 +55,7 @@
 }
 
 - (CEVItem *) createItem {
-    CEVItem *item = [CEVItem randomItem];
+    CEVItem *item = [[CEVItem alloc] init];
     [[self privateItems] addObject:item];
     return item;
 }
@@ -72,4 +80,19 @@
     
 }
 
+/// Path where this store is store'd
+- (NSString *) itemArchivePath {
+    NSArray *documentDirectories = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                       NSUserDomainMask, YES);
+    // On iOS, only one directory is reported. On OSX, multiple directories might be.
+    NSString *directory = [documentDirectories firstObject];
+
+    // And now we append our own unique name here
+    return [directory stringByAppendingPathComponent:@"items.archive"];
+}
+
+- (BOOL)saveToDisk {
+    NSString *path = [self itemArchivePath];
+    return [NSKeyedArchiver archiveRootObject:_privateItems toFile:path];
+}
 @end

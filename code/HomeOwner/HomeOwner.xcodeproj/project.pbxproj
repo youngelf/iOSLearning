@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		380080CC1990209C00701BAC /* CEVItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 380080CB1990209C00701BAC /* CEVItemCell.m */; };
+		380080CE199020BD00701BAC /* CEVItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 380080CD199020BD00701BAC /* CEVItemCell.xib */; };
 		384780BE197E0CC200DB3F18 /* CEVDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384780BD197E0CC200DB3F18 /* CEVDetailViewController.m */; };
 		384780C0197E1BE400DB3F18 /* CEVDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 384780BF197E1BE400DB3F18 /* CEVDetailViewController.xib */; };
 		387E0D6C19836F7300B7CD9E /* CEVImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E0D6B19836F7300B7CD9E /* CEVImageStore.m */; };
@@ -39,6 +41,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		380080CA1990209C00701BAC /* CEVItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEVItemCell.h; sourceTree = "<group>"; };
+		380080CB1990209C00701BAC /* CEVItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEVItemCell.m; sourceTree = "<group>"; };
+		380080CD199020BD00701BAC /* CEVItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEVItemCell.xib; sourceTree = "<group>"; };
 		384780BC197E0CC200DB3F18 /* CEVDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEVDetailViewController.h; sourceTree = "<group>"; };
 		384780BD197E0CC200DB3F18 /* CEVDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEVDetailViewController.m; sourceTree = "<group>"; };
 		384780BF197E1BE400DB3F18 /* CEVDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEVDetailViewController.xib; sourceTree = "<group>"; };
@@ -96,6 +101,9 @@
 		F6B6ADFE1977426000CE9D38 = {
 			isa = PBXGroup;
 			children = (
+				380080CA1990209C00701BAC /* CEVItemCell.h */,
+				380080CB1990209C00701BAC /* CEVItemCell.m */,
+				380080CD199020BD00701BAC /* CEVItemCell.xib */,
 				38F580B5197B7FCA00AE0A48 /* HeaderView.xib */,
 				F6B6AE391977428500CE9D38 /* CEVItemsViewController.h */,
 				F6B6AE3A1977428500CE9D38 /* CEVItemsViewController.m */,
@@ -252,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				384780C0197E1BE400DB3F18 /* CEVDetailViewController.xib in Resources */,
+				380080CE199020BD00701BAC /* CEVItemCell.xib in Resources */,
 				38F580B6197B7FCA00AE0A48 /* HeaderView.xib in Resources */,
 				F6B6AE151977426100CE9D38 /* InfoPlist.strings in Resources */,
 				F6B6AE1D1977426100CE9D38 /* Images.xcassets in Resources */,
@@ -278,6 +287,7 @@
 				F6B6AE3E1979843C00CE9D38 /* CEVItem.m in Sources */,
 				F6B6AE3B1977428500CE9D38 /* CEVItemsViewController.m in Sources */,
 				F6B6AE411979854D00CE9D38 /* CEVItemStore.m in Sources */,
+				380080CC1990209C00701BAC /* CEVItemCell.m in Sources */,
 				384780BE197E0CC200DB3F18 /* CEVDetailViewController.m in Sources */,
 				F6B6AE1B1977426100CE9D38 /* CEVAppDelegate.m in Sources */,
 			);
@@ -339,6 +349,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
+				"DYLIB_COMPATIBILITY_VERSION[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -354,7 +365,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -377,6 +388,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
+				"DYLIB_COMPATIBILITY_VERSION[sdk=*]" = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -386,6 +398,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -396,6 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HomeOwner/HomeOwner-Prefix.pch";
 				INFOPLIST_FILE = "HomeOwner/HomeOwner-Info.plist";
@@ -411,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HomeOwner/HomeOwner-Prefix.pch";
 				INFOPLIST_FILE = "HomeOwner/HomeOwner-Info.plist";

@@ -16,4 +16,9 @@
 - (UIImage *) getImageForKey:(NSString *)key;
 - (void) deleteImageForKey:(NSString *)key;
 
+/// Path where this image is stored
+- (NSString *) imagePathForKey: (NSString *) key;
+
+/// Purge the cache and remove all images from memory
+- (void)clearCache: (NSNotification *) sender;
 @end

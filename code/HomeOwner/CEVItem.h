@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CEVItem : NSObject{
+@interface CEVItem : NSObject <NSCoding> {
     NSString *_itemName;
     NSString *_serialNumber;
     int _valueInDollars;

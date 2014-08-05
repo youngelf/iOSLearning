@@ -130,4 +130,24 @@
     return descriptionString;
 }
 
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:[self itemName] forKey:@"itemName"];
+    [aCoder encodeInteger:[self valueInDollars] forKey:@"valueInDollars"];
+    [aCoder encodeObject:[self serialNumber] forKey:@"serialNumber"];
+    [aCoder encodeObject:[self dateCreated] forKey:@"dateCreated"];
+    [aCoder encodeObject:[self imageTag] forKey:@"imageTag"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [CEVItem alloc];
+    if (self) {
+        _itemName = [aDecoder decodeObjectForKey:@"itemName"];
+        _valueInDollars = [aDecoder decodeIntegerForKey:@"valueInDollars"];
+        _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
+        _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
+        _imageTag = [aDecoder decodeObjectForKey:@"imageTag"];
+    }
+    return self;
+}
+
 @end

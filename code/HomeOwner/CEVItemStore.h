@@ -25,4 +25,7 @@
 
 // Move item to new location
 - (void) moveItemAtPosition:(NSUInteger)startPosition toPosition:(NSUInteger)endPosition;
+
+/// Save the entire store to disk.
+- (BOOL) saveToDisk;
 @end
