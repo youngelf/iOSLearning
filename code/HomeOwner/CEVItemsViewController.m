@@ -8,6 +8,7 @@
 
 #import "CEVItemsViewController.h"
 #import "CEVItem.h"
+#import "CEVItemCell.h"
 #import "CEVItemStore.h"
 #import "CEVImageStore.h"
 #import "CEVDetailViewController.h"
@@ -193,8 +194,10 @@ bool MULTI_SECTION = FALSE;
 - (void) viewDidLoad {
     // Register the tableview for the right tag for view recycling
     [super viewDidLoad];
-    [[self tableView] registerClass:[UITableViewCell class]
-             forCellReuseIdentifier:TAG];
+    UINib *nib = [UINib nibWithNibName:@"CEVItemCell" bundle:nil];
+//    [[self tableView] registerClass:[CEVItemCell class]
+// forCellReuseIdentifier:TAG];
+    [[self tableView] registerNib:nib forCellReuseIdentifier:TAG];
 }
 
 // Create a new item in the list.
