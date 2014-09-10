@@ -17,6 +17,7 @@
 
 // The tag in ImageStore for an image corresponding to this item.
 @property (nonatomic, copy) NSString * imageTag;
+@property (nonatomic, strong) UIImage *thumbnail;
 
 + (instancetype)randomItem;
 
@@ -37,5 +38,7 @@
 - (int)valueInDollars;
 
 - (NSDate *)dateCreated;
+
+- (void) setThumbnailFromImage:(UIImage *)image;
 
 @end

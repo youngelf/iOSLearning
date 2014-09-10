@@ -21,7 +21,7 @@
 
 @implementation CEVItemsViewController
 
-NSString *TAG = @"UiTableViewCell";
+NSString *TAG = @"CEVItemCell";
 NSString *APP_NAME = @"VikiOwner";
 
 // Uncomment this to get multi-section support.
@@ -112,9 +112,9 @@ bool MULTI_SECTION = FALSE;
     NSUInteger rowIndex = [indexPath row];
     if (MULTI_SECTION) {
         if ([indexPath section] == 0) {
-            return [[[self cheap] objectAtIndex:rowIndex] description];
+            return [[[self cheap] objectAtIndex:rowIndex] itemName];
         } else {
-            return [[[self expensive] objectAtIndex:rowIndex] description];
+            return [[[self expensive] objectAtIndex:rowIndex] itemName];
         }
     }
     NSArray *allItems = [[CEVItemStore sharedStore] allItems];
@@ -122,20 +122,74 @@ bool MULTI_SECTION = FALSE;
         // End of list, so create a string here.
         return @"End-Of-List";
     }
-    return [[allItems objectAtIndex:rowIndex] description];
+    return [[allItems objectAtIndex:rowIndex] itemName];
+}
+
+- (NSString *) perhapsMultiItemSerial: (NSIndexPath *) indexPath {
+    NSUInteger rowIndex = [indexPath row];
+    if (MULTI_SECTION) {
+        if ([indexPath section] == 0) {
+            return [[[self cheap] objectAtIndex:rowIndex] serialNumber];
+        } else {
+            return [[[self expensive] objectAtIndex:rowIndex] serialNumber];
+        }
+    }
+    NSArray *allItems = [[CEVItemStore sharedStore] allItems];
+    if (MARK_END_OF_LIST &&  rowIndex == [allItems count]) {
+        // End of list, so create a string here.
+        return @"";
+    }
+    return [[allItems objectAtIndex:rowIndex] serialNumber];
+}
+
+- (int) perhapsMultiItemValue: (NSIndexPath *) indexPath {
+    NSUInteger rowIndex = [indexPath row];
+    if (MULTI_SECTION) {
+        if ([indexPath section] == 0) {
+            return [[[self cheap] objectAtIndex:rowIndex] valueInDollars];
+        } else {
+            return [[[self expensive] objectAtIndex:rowIndex] valueInDollars];
+        }
+    }
+    NSArray *allItems = [[CEVItemStore sharedStore] allItems];
+    if (MARK_END_OF_LIST &&  rowIndex == [allItems count]) {
+        // End of list, so zero value.
+        return 0;
+    }
+    return [[allItems objectAtIndex:rowIndex] valueInDollars];
+}
+
+- (UIImage *) perhapsMultiItemImage: (NSIndexPath *) indexPath {
+    NSUInteger rowIndex = [indexPath row];
+    if (MULTI_SECTION) {
+        if ([indexPath section] == 0) {
+            return [[[self cheap] objectAtIndex:rowIndex] thumbnail];
+        } else {
+            return [[[self expensive] objectAtIndex:rowIndex] thumbnail];
+        }
+    }
+    NSArray *allItems = [[CEVItemStore sharedStore] allItems];
+    if (MARK_END_OF_LIST &&  rowIndex == [allItems count]) {
+        // End of list, so zero value.
+        return nil;
+    }
+    return [[allItems objectAtIndex:rowIndex] thumbnail];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView
           cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // Create a textview as the table view cell.
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:TAG
+    CEVItemCell *cell = [tableView dequeueReusableCellWithIdentifier:TAG
                                                              forIndexPath:indexPath];
     // Without view recycling.
 //    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
 //                                                   reuseIdentifier:TAG];
     // Set the text on the item.
-    [[cell textLabel] setText:[self perhapsMultiItemText:indexPath]];
-
+    [[cell nameLabel] setText:[self perhapsMultiItemText:indexPath]];
+    [[cell serialNumberLabel] setText:[self perhapsMultiItemSerial:indexPath]];
+    [[cell valueLabel] setText:
+     [NSString stringWithFormat:@"%d", [self perhapsMultiItemValue:indexPath]]];
+    [[cell imageView] setImage:[self perhapsMultiItemImage:indexPath]];
     return cell;
 }
 
@@ -194,6 +248,8 @@ bool MULTI_SECTION = FALSE;
 - (void) viewDidLoad {
     // Register the tableview for the right tag for view recycling
     [super viewDidLoad];
+    
+    // Use our new item cell, which shows the image of the object.
     UINib *nib = [UINib nibWithNibName:@"CEVItemCell" bundle:nil];
 //    [[self tableView] registerClass:[CEVItemCell class]
 // forCellReuseIdentifier:TAG];
@@ -274,6 +330,13 @@ bool MULTI_SECTION = FALSE;
 
 // Handle clicking on a single item
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Disallow clicks on the last element
+    BOOL isLastRow = (MARK_END_OF_LIST
+     && ([indexPath row] >= [[[CEVItemStore sharedStore] allItems] count]));
+    if (isLastRow) {
+        return;
+    }
+
     CEVItem *item = [[[CEVItemStore sharedStore] allItems] objectAtIndex:[indexPath row]];
     CEVDetailViewController *controller = [[CEVDetailViewController alloc] initForNewItem:NO];
     [controller setItem:item];

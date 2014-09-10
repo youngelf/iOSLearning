@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CEVDetailViewController.m"
-            timestampString = "428865653.896324"
+            timestampString = "431933283.237703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "-prepareViewsForOrientation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CEVItem.m"
-            timestampString = "428872039.207581"
+            timestampString = "431933283.237703"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "@implementation CEVItem"
             landmarkType = "3">
          </BreakpointContent>

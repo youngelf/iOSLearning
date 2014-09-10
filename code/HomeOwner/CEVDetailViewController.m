@@ -97,6 +97,8 @@
     }
 
     [[self imageView] setImage:image];
+    // Create the thumbnail for this item.
+    [[self item] setThumbnailFromImage:image];
     
     // Store this image with the appropriate tag.
     [[CEVImageStore sharedStore] setImage:image forKey:[[self item] imageTag]];

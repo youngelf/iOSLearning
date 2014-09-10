@@ -136,6 +136,7 @@
     [aCoder encodeObject:[self serialNumber] forKey:@"serialNumber"];
     [aCoder encodeObject:[self dateCreated] forKey:@"dateCreated"];
     [aCoder encodeObject:[self imageTag] forKey:@"imageTag"];
+    [aCoder encodeObject:[self thumbnail] forKey:@"thumbnail"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -146,8 +147,44 @@
         _serialNumber = [aDecoder decodeObjectForKey:@"serialNumber"];
         _dateCreated = [aDecoder decodeObjectForKey:@"dateCreated"];
         _imageTag = [aDecoder decodeObjectForKey:@"imageTag"];
+        _thumbnail = [aDecoder decodeObjectForKey:@"thumbnail"];
     }
     return self;
+}
+
+- (void) setThumbnailFromImage:(UIImage *)image {
+    CGSize origImageSize = image.size;
+    
+    // Size of the thumbnail
+    CGRect tNail = CGRectMake(0, 0, 40, 40);
+    
+    // Figure out the scaling factor so we preserve the original aspect ratio
+    float ratio = MAX(tNail.size.width/origImageSize.width,
+                      tNail.size.height/origImageSize.height);
+    
+    // Create a transparent bitmap context with the scaling factor
+    UIGraphicsBeginImageContextWithOptions(tNail.size, NO, 0.0);
+    
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:tNail cornerRadius:5.0];
+    // Drawing clipped to this path
+    [path addClip];
+    
+    // Center the image in this thumbnail square
+    CGRect projectRect;
+    projectRect.size.width = ratio * origImageSize.width;
+    projectRect.size.height = ratio * origImageSize.height;
+    
+    projectRect.origin.x = (tNail.size.width - projectRect.size.width) / 2;
+    projectRect.origin.y = (tNail.size.height - projectRect.size.height) / 2;
+    // Draw the image in it.
+    [image drawInRect:projectRect];
+    
+    // Get the image from the context and save it.
+    UIImage *thumbNail = UIGraphicsGetImageFromCurrentImageContext();
+    [self setThumbnail:thumbNail];
+    
+    // Clean up image resources
+    UIGraphicsEndImageContext();
 }
 
 @end
