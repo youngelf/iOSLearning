@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hgA-8W-Yp4">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hgA-8W-Yp4">
                         <rect key="frame" x="5" y="2" width="40" height="40"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <constraints>
@@ -22,20 +22,20 @@
                             <constraint firstAttribute="width" constant="40" id="rFv-eG-f0h"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEZ-g9-5M1">
-                        <rect key="frame" x="53" y="2" width="211" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEZ-g9-5M1">
+                        <rect key="frame" x="53" y="2" width="217" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79i-g4-OmH">
-                        <rect key="frame" x="53" y="21" width="211" height="21"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79i-g4-OmH">
+                        <rect key="frame" x="53" y="21" width="217" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esd-vh-hsD">
-                        <rect key="frame" x="267" y="2" width="48" height="40"/>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Esd-vh-hsD">
+                        <rect key="frame" x="273" y="2" width="42" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                     <constraint firstItem="79i-g4-OmH" firstAttribute="top" secondItem="LO3-Si-y4i" secondAttribute="top" constant="21" id="Ncc-gn-hc1"/>
                     <constraint firstItem="79i-g4-OmH" firstAttribute="leading" secondItem="hgA-8W-Yp4" secondAttribute="trailing" constant="8" id="aB2-fQ-hCM"/>
                     <constraint firstItem="Esd-vh-hsD" firstAttribute="leading" secondItem="nEZ-g9-5M1" secondAttribute="trailing" constant="3" id="dom-pA-0PJ"/>
-                    <constraint firstAttribute="bottom" secondItem="hgA-8W-Yp4" secondAttribute="bottom" constant="20" symbolic="YES" id="gVG-NB-OHE"/>
+                    <constraint firstAttribute="bottom" secondItem="hgA-8W-Yp4" secondAttribute="bottom" constant="1" id="gVG-NB-OHE"/>
                     <constraint firstItem="hgA-8W-Yp4" firstAttribute="leading" secondItem="LO3-Si-y4i" secondAttribute="leading" constant="5" id="gXe-UW-NZw"/>
                     <constraint firstItem="nEZ-g9-5M1" firstAttribute="leading" secondItem="hgA-8W-Yp4" secondAttribute="trailing" constant="8" id="hDe-Tn-RN1"/>
                     <constraint firstAttribute="trailing" secondItem="Esd-vh-hsD" secondAttribute="trailing" constant="5" id="jAF-gu-gBA"/>
