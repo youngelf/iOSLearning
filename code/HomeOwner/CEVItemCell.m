@@ -10,4 +10,10 @@
 
 @implementation CEVItemCell
 
+- (IBAction) showImage:(id)sender {
+    if ([self actionBlock]) {
+        // Execute it
+        [self actionBlock]();
+    }
+}
 @end

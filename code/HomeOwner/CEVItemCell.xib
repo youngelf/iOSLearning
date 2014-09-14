@@ -40,20 +40,34 @@
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z9O-De-bZZ">
+                        <rect key="frame" x="5" y="2" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="showImage:" destination="Hs3-2p-j7f" eventType="touchUpInside" id="5a6-Sa-j3h"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Esd-vh-hsD" firstAttribute="leading" secondItem="79i-g4-OmH" secondAttribute="trailing" constant="3" id="BKx-R4-HM8"/>
+                    <constraint firstItem="Z9O-De-bZZ" firstAttribute="bottom" secondItem="hgA-8W-Yp4" secondAttribute="bottom" id="Fsy-cQ-ZU0"/>
                     <constraint firstAttribute="bottom" secondItem="nEZ-g9-5M1" secondAttribute="bottom" constant="20" id="G2C-mc-XUr"/>
+                    <constraint firstItem="Z9O-De-bZZ" firstAttribute="leading" secondItem="hgA-8W-Yp4" secondAttribute="leading" id="GQ1-aO-fPX"/>
                     <constraint firstItem="Esd-vh-hsD" firstAttribute="top" secondItem="LO3-Si-y4i" secondAttribute="top" constant="2" id="IZP-VD-L6H"/>
                     <constraint firstItem="nEZ-g9-5M1" firstAttribute="top" secondItem="LO3-Si-y4i" secondAttribute="top" constant="2" id="J9X-iN-I59"/>
                     <constraint firstItem="79i-g4-OmH" firstAttribute="top" secondItem="LO3-Si-y4i" secondAttribute="top" constant="21" id="Ncc-gn-hc1"/>
                     <constraint firstItem="79i-g4-OmH" firstAttribute="leading" secondItem="hgA-8W-Yp4" secondAttribute="trailing" constant="8" id="aB2-fQ-hCM"/>
+                    <constraint firstItem="Z9O-De-bZZ" firstAttribute="trailing" secondItem="hgA-8W-Yp4" secondAttribute="trailing" id="aMw-z3-xAx"/>
                     <constraint firstItem="Esd-vh-hsD" firstAttribute="leading" secondItem="nEZ-g9-5M1" secondAttribute="trailing" constant="3" id="dom-pA-0PJ"/>
                     <constraint firstAttribute="bottom" secondItem="hgA-8W-Yp4" secondAttribute="bottom" constant="1" id="gVG-NB-OHE"/>
                     <constraint firstItem="hgA-8W-Yp4" firstAttribute="leading" secondItem="LO3-Si-y4i" secondAttribute="leading" constant="5" id="gXe-UW-NZw"/>
                     <constraint firstItem="nEZ-g9-5M1" firstAttribute="leading" secondItem="hgA-8W-Yp4" secondAttribute="trailing" constant="8" id="hDe-Tn-RN1"/>
                     <constraint firstAttribute="trailing" secondItem="Esd-vh-hsD" secondAttribute="trailing" constant="5" id="jAF-gu-gBA"/>
                     <constraint firstAttribute="bottom" secondItem="79i-g4-OmH" secondAttribute="bottom" constant="1" id="nod-d1-RZC"/>
+                    <constraint firstItem="Z9O-De-bZZ" firstAttribute="top" secondItem="hgA-8W-Yp4" secondAttribute="top" id="xWK-5f-B9T"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

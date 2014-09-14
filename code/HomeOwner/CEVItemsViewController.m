@@ -12,6 +12,7 @@
 #import "CEVItemStore.h"
 #import "CEVImageStore.h"
 #import "CEVDetailViewController.h"
+#import "CEVImageViewController.h"
 
 @interface CEVItemsViewController()
 @property (strong, nonatomic) NSMutableArray *cheap;
@@ -108,64 +109,13 @@ bool MULTI_SECTION = FALSE;
     return [[[CEVItemStore sharedStore] allItems] count] + (MARK_END_OF_LIST ? 1 : 0);
 }
 
-- (NSString *) perhapsMultiItemText: (NSIndexPath *) indexPath {
+- (CEVItem *) perhapsMultiItem: (NSIndexPath *) indexPath {
     NSUInteger rowIndex = [indexPath row];
     if (MULTI_SECTION) {
         if ([indexPath section] == 0) {
-            return [[[self cheap] objectAtIndex:rowIndex] itemName];
+            return [[self cheap] objectAtIndex:rowIndex];
         } else {
-            return [[[self expensive] objectAtIndex:rowIndex] itemName];
-        }
-    }
-    NSArray *allItems = [[CEVItemStore sharedStore] allItems];
-    if (MARK_END_OF_LIST &&  rowIndex == [allItems count]) {
-        // End of list, so create a string here.
-        return @"End-Of-List";
-    }
-    return [[allItems objectAtIndex:rowIndex] itemName];
-}
-
-- (NSString *) perhapsMultiItemSerial: (NSIndexPath *) indexPath {
-    NSUInteger rowIndex = [indexPath row];
-    if (MULTI_SECTION) {
-        if ([indexPath section] == 0) {
-            return [[[self cheap] objectAtIndex:rowIndex] serialNumber];
-        } else {
-            return [[[self expensive] objectAtIndex:rowIndex] serialNumber];
-        }
-    }
-    NSArray *allItems = [[CEVItemStore sharedStore] allItems];
-    if (MARK_END_OF_LIST &&  rowIndex == [allItems count]) {
-        // End of list, so create a string here.
-        return @"";
-    }
-    return [[allItems objectAtIndex:rowIndex] serialNumber];
-}
-
-- (int) perhapsMultiItemValue: (NSIndexPath *) indexPath {
-    NSUInteger rowIndex = [indexPath row];
-    if (MULTI_SECTION) {
-        if ([indexPath section] == 0) {
-            return [[[self cheap] objectAtIndex:rowIndex] valueInDollars];
-        } else {
-            return [[[self expensive] objectAtIndex:rowIndex] valueInDollars];
-        }
-    }
-    NSArray *allItems = [[CEVItemStore sharedStore] allItems];
-    if (MARK_END_OF_LIST &&  rowIndex == [allItems count]) {
-        // End of list, so zero value.
-        return 0;
-    }
-    return [[allItems objectAtIndex:rowIndex] valueInDollars];
-}
-
-- (UIImage *) perhapsMultiItemImage: (NSIndexPath *) indexPath {
-    NSUInteger rowIndex = [indexPath row];
-    if (MULTI_SECTION) {
-        if ([indexPath section] == 0) {
-            return [[[self cheap] objectAtIndex:rowIndex] thumbnail];
-        } else {
-            return [[[self expensive] objectAtIndex:rowIndex] thumbnail];
+            return [[self expensive] objectAtIndex:rowIndex];
         }
     }
     NSArray *allItems = [[CEVItemStore sharedStore] allItems];
@@ -173,7 +123,7 @@ bool MULTI_SECTION = FALSE;
         // End of list, so zero value.
         return nil;
     }
-    return [[allItems objectAtIndex:rowIndex] thumbnail];
+    return [allItems objectAtIndex:rowIndex];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView
@@ -185,12 +135,45 @@ bool MULTI_SECTION = FALSE;
 //    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
 //                                                   reuseIdentifier:TAG];
     // Set the text on the item.
-    [[cell nameLabel] setText:[self perhapsMultiItemText:indexPath]];
-    [[cell serialNumberLabel] setText:[self perhapsMultiItemSerial:indexPath]];
+    CEVItem *item = [self perhapsMultiItem:indexPath];
+    [[cell nameLabel] setText:[item itemName]];
+    [[cell serialNumberLabel] setText:[item serialNumber]];
     [[cell valueLabel] setText:
-     [NSString stringWithFormat:@"%d", [self perhapsMultiItemValue:indexPath]]];
-    [[cell imageView] setImage:[self perhapsMultiItemImage:indexPath]];
+     [NSString stringWithFormat:@"%d", [item valueInDollars]]];
+    [[cell imageView] setImage:[item thumbnail]];
+    __weak CEVItemCell *weakCell = cell;
+    [cell setActionBlock:^(void) {
+        NSLog(@"Testing");
+        // Only on iPad, show a popover of the image
+        if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+            NSString *itemKey = [item imageTag];
+            UIImage *img = [[CEVImageStore sharedStore] getImageForKey:itemKey];
+            if (!img) {
+                return;
+            }
+            // Make a rectangle
+            CEVItemCell *strongCell = weakCell;
+            CGRect rect = [[self view] convertRect:[[strongCell thumbnailView] bounds]
+                                          fromView:[strongCell thumbnailView]];
+            // Create a new image view controller with the correct image
+            CEVImageViewController *ivc = [[CEVImageViewController alloc] init];
+            [ivc setImage:img];
+            [self setImagePopover:
+             [[UIPopoverController alloc] initWithContentViewController:ivc]];
+            [[self imagePopover] setDelegate:self];
+            [[self imagePopover] setPopoverContentSize:CGSizeMake(600, 600)];
+            [[self imagePopover] presentPopoverFromRect:rect
+                                                 inView:self.view
+                               permittedArrowDirections:UIPopoverArrowDirectionAny
+                                               animated:YES];
+        }
+    }];
     return cell;
+}
+
+/// Dismiss the image popover if the user clicks anywhere outside it
+- (void) popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    [self setImagePopover:nil];
 }
 
 // True if this is the last row, false otherwise.

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CEVItem.h"
 
-@interface CEVItemsViewController : UITableViewController <UITableViewDelegate>
+@interface CEVItemsViewController : UITableViewController <UITableViewDelegate, UIPopoverControllerDelegate>
 @property (weak, nonatomic) CEVItem *item;
+@property (strong, nonatomic) UIPopoverController *imagePopover;
 @end

@@ -12,6 +12,7 @@
 		384780BE197E0CC200DB3F18 /* CEVDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 384780BD197E0CC200DB3F18 /* CEVDetailViewController.m */; };
 		384780C0197E1BE400DB3F18 /* CEVDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 384780BF197E1BE400DB3F18 /* CEVDetailViewController.xib */; };
 		387E0D6C19836F7300B7CD9E /* CEVImageStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 387E0D6B19836F7300B7CD9E /* CEVImageStore.m */; };
+		38946EC219C54ADC006B45CE /* CEVImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38946EC119C54ADC006B45CE /* CEVImageViewController.m */; };
 		38F580B6197B7FCA00AE0A48 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38F580B5197B7FCA00AE0A48 /* HeaderView.xib */; };
 		F6B6AE0B1977426000CE9D38 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6AE0A1977426000CE9D38 /* Foundation.framework */; };
 		F6B6AE0D1977426000CE9D38 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6B6AE0C1977426000CE9D38 /* CoreGraphics.framework */; };
@@ -49,6 +50,8 @@
 		384780BF197E1BE400DB3F18 /* CEVDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CEVDetailViewController.xib; sourceTree = "<group>"; };
 		387E0D6A19836F7300B7CD9E /* CEVImageStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEVImageStore.h; sourceTree = "<group>"; };
 		387E0D6B19836F7300B7CD9E /* CEVImageStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEVImageStore.m; sourceTree = "<group>"; };
+		38946EC019C54ADC006B45CE /* CEVImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CEVImageViewController.h; sourceTree = "<group>"; };
+		38946EC119C54ADC006B45CE /* CEVImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CEVImageViewController.m; sourceTree = "<group>"; };
 		38F580B5197B7FCA00AE0A48 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		F6B6AE071977426000CE9D38 /* HomeOwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeOwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6B6AE0A1977426000CE9D38 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -103,6 +106,8 @@
 			children = (
 				380080CA1990209C00701BAC /* CEVItemCell.h */,
 				380080CB1990209C00701BAC /* CEVItemCell.m */,
+				38946EC019C54ADC006B45CE /* CEVImageViewController.h */,
+				38946EC119C54ADC006B45CE /* CEVImageViewController.m */,
 				380080CD199020BD00701BAC /* CEVItemCell.xib */,
 				38F580B5197B7FCA00AE0A48 /* HeaderView.xib */,
 				F6B6AE391977428500CE9D38 /* CEVItemsViewController.h */,
@@ -282,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38946EC219C54ADC006B45CE /* CEVImageViewController.m in Sources */,
 				387E0D6C19836F7300B7CD9E /* CEVImageStore.m in Sources */,
 				F6B6AE171977426100CE9D38 /* main.m in Sources */,
 				F6B6AE3E1979843C00CE9D38 /* CEVItem.m in Sources */,

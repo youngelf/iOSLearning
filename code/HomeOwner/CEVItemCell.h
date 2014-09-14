@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *serialNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
+/// The action to execute when the image thumbnail is clicked on
+@property (nonatomic, copy) void (^actionBlock) (void);
 @end
